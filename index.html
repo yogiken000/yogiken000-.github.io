@@ -39,13 +39,18 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+    <script>
+        // service workerが有効なら、service-worker.js を登録します
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./service-worker.js').then(function () { console.log('Service Worker Registered'); });
+        }
+    </script>
+
 </head>
 <body>
-    やあ
-    <script>
+    <h1>Hello PWA.</h1>
+    <img src="/img/smoothie-brb.jpg" alt="PWA logo" class="image" />
+    <a href="p.html">p.html</a>
 
-
-    </script>
-    <!-- <script src="js/main.js"></script> -->
 </body>
 </html>
