@@ -37,7 +37,12 @@
     <link rel="stylesheet" href="css/style.css">
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <style type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+    </style>
 
     <script>
         // service workerが有効なら、service-worker.js を登録します
@@ -48,9 +53,180 @@
 
 </head>
 <body>
-    <h1>Hello PWA.</h1>
-    <img src="/img/smoothie-brb.jpg" alt="PWA logo" class="image" />
-    <a href="p.html">p.html</a>
 
+    <div class="notice-box">
+        <p v-show="notices !== null">{{ notice }}</p>
+    </div>
+
+    <header class="header-area">
+        <div class="sec-inner">
+            <h1>Todo Loid</h1>
+            <ul class="main-menu">
+                <li class="setting">
+                    <div class="main-menu-ttl"><i class="fas fa-cog icon"></i></div>
+                    <ul class="setting-list dropDown-list">
+                        <li><a href="#"><i class="far fa-user-circle icon"></i>プロフィール</a></li>
+                        <li><a href="#"><i class="fas fa-undo icon"></i>情報更新</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt icon"></i>利用規約</a></li>
+                        <li><a href="#"><i class="fas fa-cog icon"></i>環境設定</a></li>
+                        <li><a href="#"><i class="far fa-question-circle icon"></i>ヘルプ</a></li>
+                    </ul>
+                    <span class="triangle"></span>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+
+    <section class="todolist-area" id='todolist'>
+        <div class="sec-inner">
+
+            <div class="todo-box box-style01">
+                <h2 class="box-ttl"><span class="icon-box"><i class="fas fa-list icon"></i></span>タスク</h2>
+                <ul class="todolist-list list-box" v-if="todos !=''">
+                    <li v-for="(todo,index) in todos">
+                        <div class="todo-ttl-box">
+                            <span class="comp-btn" v-on:click="completeTodo(index); getTime()"></span>
+                            <div v-if="!todo.editMode" class="todo-ttl" v-on:click="editTodo(index)">{{ todo.ttl }}</div>
+                            <input v-else class="todo-ttl-edit" v-model="todos[index].ttl" v-on:keyup.enter="editTodo(index)">
+                        </div>
+                        <span class="delete-btn" v-on:click="deleteTodo(index)">削除</span>
+                    </li>
+                </ul>
+                <p class="note" v-else>新しいタスクを追加してください</p>
+                <div class="todolist-add">
+                    <input type="text" placeholder="新しいタスクを入力してください" v-model="newTodo" v-on:keyup.enter="addTodo(newTodo)">
+                    <button v-on:click="addTodo">タスクを追加</button>
+                </div>
+            </div>
+
+            <div class="complete-box box-style01">
+                <h2 class="box-ttl"><span class="icon-box"><i class="fas fa-paper-plane icon"></i></span>完了タスク</h2>
+                <ul class="complete-list list-box" v-if="completes !=''">
+                    <li v-for="(complete,index) in completes">
+                        <span class="comp-btn"></span>
+                        <div class="todo-ttl">{{ complete.ttl }}</div>
+                    </li>
+                </ul>
+                <p class="note" v-else>完了済みのタスクはありません</p>
+            </div>
+
+            <div class="trash-box box-style01">
+                <h2 class="box-ttl"><span class="icon-box"><i class="fas fa-trash icon"></i></span>ゴミ箱<span class="trash-clear" v-on:click="trashClear" v-bind:class="{jsActive: trashes ==''}">ゴミ箱を空にする</span></h2>
+                <ul class="trash-list list-box" v-if="trashes !=''">
+                    <li v-for="(trash,index) in trashes">
+                        <span class="comp-btn"></span>
+                        <div class="todo-ttl">{{ trash.ttl }}</div>
+                    </li>
+                </ul>
+                <p class="note" v-else>ゴミ箱は空です</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        /**************************************************************
+
+        vue
+
+        ***************************************************************/
+
+        vue_data = {
+            newTodo: '',
+            todos: [
+                { ttl: 'Web API取得', editMode: false },
+                { ttl: 'AWSサーバレス構築', editMode: false },
+                { ttl: 'コンポーネント', editMode: false }
+            ],
+            completes: [
+
+            ],
+            trashes: [
+
+            ],
+            notices: [
+                { display: '' },
+                { complete: '完了しました！' },
+                { trash: '削除しました！' },
+                { edit: '編集しました！' }
+            ]
+        }
+        var todolist = new Vue({
+            el: '#todolist',
+            data: vue_data,
+            methods: {
+                //todoを追加
+                addTodo: function () {
+                    if (this.newTodo !== '') {
+                        this.todos.push({
+                            ttl: this.newTodo,
+                            editMode: false
+                        });
+                        this.newTodo = '';
+                    }
+                },
+                deleteTodo: function (todo_num) {
+                    this.trashes.push(this.todos[todo_num]);
+                    this.todos.splice(todo_num, 1);
+                },
+                //todoを編集
+                editTodo: function (todo_num) {
+                    this.todos[todo_num].editMode = !this.todos[todo_num].editMode;
+
+                },
+                completeTodo: function (todo_num) {
+                    this.completes.push(this.todos[todo_num]);
+                    this.todos.splice(todo_num, 1);
+                },
+                trashClear: function () {
+                    this.trashes = [];
+                },
+                getTime: function () {
+                    var now = new Date();
+                    var y = now.getFullYear();
+                    var m = now.getMonth() + 1;
+                    var d = now.getDate();
+                    var w = now.getDay();
+                    var wd = ['日', '月', '火', '水', '木', '金', '土'];
+                    var h = now.getHours();
+                    var mi = now.getMinutes();
+                    var s = now.getSeconds();
+
+                    var time = m + '月' + d + '日(' + wd[w] + ')';
+                    console.log(time);
+                }
+
+            }
+
+        });
+
+        // Vue.directive('auto-focus', {
+        //   bind: function () {
+        //     var el = this.el;
+        //     Vue.nextTick(function(){
+        //         el.focus();
+        //     });
+        //   }
+        // });
+
+        /**************************************************************
+
+        jQuery
+
+        ***************************************************************/
+        $(function () {
+            $(document).on('click touchend', function (e) {
+                if (!$(e.target).closest('.main-menu-ttl').length) {
+                    $('.main-menu-ttl').next().fadeOut(100);
+                } else {
+                    $('.main-menu-ttl').next().fadeToggle(100);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
