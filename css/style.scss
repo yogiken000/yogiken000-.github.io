@@ -1,0 +1,186 @@
+/**********************************************************
+
+動画ページ
+
+***********************************************************/
+body {
+    color: #333;
+    font-family: "Hiragino Maru Gothic W4 JIS2004", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3",
+        "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@media screen and (min-width: 1001px) {
+    .pr_pc-none {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .pr_sp-none {
+        display: none !important;
+    }
+}
+
+img {
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.inner {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.productList {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+    overflow: hidden;
+}
+.productList__item {
+    width: 33.333%;
+    margin: 0 0 40px 0;
+    padding: 0 15px;
+}
+.productList__link {
+    display: block;
+
+    &:hover .productList__logoImg {
+        opacity: 1;
+    }
+}
+.productList__imgBox {
+    position: relative;
+}
+.productList__mainImg {
+    display: block;
+    margin: 0 0 15px 0;
+    max-width: 100%;
+}
+.productList__logoImg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: 0.4s;
+    max-width: 100%;
+}
+.productList__ttl {
+    margin: 0 0 15px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+.productList__lead {
+    font-size: 16px;
+}
+.productList__brandList {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+.productList__brandLink {
+    display: block;
+    margin: 0 10px 10px 0;
+}
+.productList__brandImg {
+    display: block;
+    height: 30px;
+}
+
+/*** logoサイズ調整 ***/
+.logo_joicellule {
+
+}
+.logo_hng {
+
+}
+.logo_rozebe {
+
+}
+.logo_joiecelu {
+
+}
+.logo_amazon {
+
+}
+.logo_rakuten {
+
+}
+.logo_yahoo {
+
+}
+
+
+
+@media screen and (max-width: 767px) {
+    .inner {
+        max-width: 370px;
+        padding: 0 15px;
+    }
+    .productList {
+        display: block;
+        margin: 0;
+    }
+    .productList__item {
+        width: auto;
+        margin: 0 0 40px 0;
+        padding: 0;
+    }
+    .productList__link {
+        display: block;
+
+        &:hover .productList__logoImg {
+            opacity: 1;
+        }
+    }
+    .productList__imgBox {
+        position: relative;
+    }
+    .productList__mainImg {
+        display: block;
+        margin: 0 0 15px 0;
+        max-width: 100%;
+    }
+    .productList__logoImg {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: 0.4s;
+        max-width: 100%;
+    }
+    .productList__ttl {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .productList__lead {
+        font-size: 16px;
+    }
+    .productList__brandList {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .productList__brandImg {
+
+    }
+}
+
+#canvas-wrap {
+position: fixed;
+top: 0;
+left: 0;
+z-index: -1;
+width: 100%;
+height: 100%;
+margin: 0 auto;
+}

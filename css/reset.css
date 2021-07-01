@@ -1,0 +1,128 @@
+@charset "utf-8";
+/* ============================================================================
+ Update: 2010/01/05
+ reset用CSS
+============================================================================= */
+*{
+	box-sizing:border-box;
+	 -moz-box-sizing: border-box;
+ 	-webkit-box-sizing: border-box;
+}
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote,
+a, address, img, strong, figure,
+del, ins, dfn, em, abbr, acronym, kbd, q, pre, cite, code, samp, sub, sup, var,
+fieldset, form, label, legend,
+table, caption, thead, tbody, tfoot, tr, th, td,
+dl, dt, dd, ol, ul, li{
+ margin: 0;
+ border: 0;
+ padding: 0;
+ background: transparent;
+ font-style: normal;
+ font-weight: normal;
+ font-size: 100%;
+}
+
+html{ overflow-y: scroll;}
+
+ol, ul{ list-style: none;}
+
+hr{ display: none;}
+
+del, ins{ text-decoration: none;}
+
+blockquote, q{ quotes: none;}
+
+table{
+ border-collapse: collapse;
+ border-spacing: 0;
+}
+
+a{
+	text-decoration: none;
+	color: inherit;
+}
+
+.clearfix:after{
+  content: ".";
+  display: block;
+  height: 0;
+  font-size:0;
+  clear: both;
+  visibility:hidden;
+}
+
+
+/***************************************************
+
+css
+
+***************************************************/
+
+/* flex box
+――――――――――――――――――――――――――――――――――――――――――――――*/
+.flex {
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+}
+.flex-c-c {
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  justify-content: center;
+  -ms-flex-pack: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -ms-flex-align: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+}
+.flex-n-c {
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  align-items: center;
+  -ms-flex-align: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+}
+.flex-c-n {
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  justify-content: center;
+  -ms-flex-pack: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+}
+
+/* button
+――――――――――――――――――――――――――――――――――――――――――――――*/
+.btn {
+  display: inline-block;
+  padding: 7px 10px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 3px;
+  text-align: center;
+  -webkit-transition: 0.1s;
+  -o-transition: 0.1s;
+  transition: 0.1s;
+}
+.btn:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
