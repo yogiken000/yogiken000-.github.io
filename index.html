@@ -94,11 +94,11 @@
         const db = firebase.firestore();
         const userRef = db.collection('test');
 
-        userRef.doc('ItxCkyqWlrLjxk895aiS').set({
+        userRef.doc().set({
             name: '鈴木太郎',
             age: 22,
-            birthday: new Date('1996-11-11') // timestampe型にはDateオブジェクトを渡します。
-  createdAt: db.FieldValue.serverTimestamp() // サーバーの時間をセットすることもできます。
+            birthday: new Date('1996-11-11'), // timestampe型にはDateオブジェクトを渡します。
+            createdAt: db.FieldValue.serverTimestamp() // サーバーの時間をセットすることもできます。
         })
             .then(() =>)
             .catch(e => )
