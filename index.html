@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="css/style.css">
 
     <link rel="manifest" href="/manifest.json">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 
     <script>
@@ -65,24 +66,24 @@
         </nav>
     </div>
 
+    <input type="text" id="cont">
 
-    <h1>Firebase Auth for Twitter</h1>
-    <div id="firebaseui-auth-container"></div>
+    <button type="button" id="add_btn">追加</button>
+    <div id="message"></div>
+
 
 
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/3.5.2/firebase-ui-auth__ja.js"></script>
 
 
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
             apiKey: "AIzaSyCe6HOsdkxprLj2xPlpGBh_gAsZgkNPUJ8",
-            authDomain: "https://yogiken000.github.io/",
+            authDomain: "online-7ad75.firebaseapp.com",
             databaseURL: "https://online-7ad75.firebaseio.com",
             projectId: "online-7ad75",
             storageBucket: "online-7ad75.appspot.com",
@@ -92,47 +93,31 @@
         firebase.initializeApp(firebaseConfig);
 
 
+        const db = firebase.firestore();
+        const userRef = db.collection('test');
 
-        //----------------------------------------------
-        // Firebase UIの設定
-        //----------------------------------------------
-        var uiConfig = {
-            // ログイン完了時のリダイレクト先
-            signInSuccessUrl: '/auth/twitter/done.html',
-
-            // 利用する認証機能
-            signInOptions: [
-                firebase.auth.TwitterAuthProvider.PROVIDER_ID
-            ],
-
-            // 利用規約のURL(任意で設定)
-            tosUrl: 'http://example.com/kiyaku/',
-            // プライバシーポリシーのURL(任意で設定)
-            privacyPolicyUrl: 'http://example.com/privacy'
-        };
-
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
-        ui.start('#firebaseui-auth-container', uiConfig);
+        function addDB(val) {
+            userRef.doc().set({
+                name: val
+            })
+                .then(() => {
+                    alert('成功');
+                })
+                .catch((e) => {
+                    alert('失敗');
+                });
+        }
 
 
-        // Initialize Firebase
-        // firebase.initializeApp(firebaseConfig);
+        $('#add_btn').on('click', function () {
+            let val = $('#cont').val();
+            addDB(val);
+        });
 
 
-        // const db = firebase.firestore();
-        // const userRef = db.collection('test');
-
-        // userRef.doc().set({
-        //     name: '鈴木太郎',
-        //     age: 22,
-        //     birthday: new Date('1996-11-11') // timestampe型にはDateオブジェクトを渡します。
-        // })
-        //     .then(() => {
-        //         console.log('成功');
-        //     })
-        //     .catch((e) => {
-
-        //     });
+        userRef.onSnapshot((doc) => {
+            console.log("Current data: ", doc.data());
+        });
     </script>
 </body>
 </html>
