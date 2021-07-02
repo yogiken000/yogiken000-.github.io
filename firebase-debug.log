@@ -1,0 +1,29 @@
+[debug] [2021-07-02T04:54:23.020Z] ----------------------------------------------------------------------
+[debug] [2021-07-02T04:54:23.023Z] Command:       C:\Program Files (x86)\Nodist\v-x64\12.5.0\node.exe C:\Program Files (x86)\Nodist\bin\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2021-07-02T04:54:23.023Z] CLI Version:   9.14.0
+[debug] [2021-07-02T04:54:23.023Z] Platform:      win32
+[debug] [2021-07-02T04:54:23.023Z] Node Version:  v12.5.0
+[debug] [2021-07-02T04:54:23.024Z] Time:          Fri Jul 02 2021 13:54:23 GMT+0900 (GMT+09:00)
+[debug] [2021-07-02T04:54:23.024Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-07-02T04:54:23.033Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-07-02T04:54:23.033Z] > authorizing via signed-in user (yogiken000@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\ky-k-yogi\Documents\kenken案件\pwa_test\yogiken000.github.io
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
