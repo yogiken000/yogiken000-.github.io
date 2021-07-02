@@ -22,7 +22,7 @@
     <!-- アドレスバー等のブラウザのUIを非表示 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- default（Safariと同じ） / black（黒） / black-translucent（ステータスバーをコンテンツに含める） -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- ホーム画面に表示されるアプリ名 -->
     <meta name="apple-mobile-web-app-title" content="ken">
     <!-- ホーム画面に表示されるアプリアイコン -->
@@ -64,5 +64,44 @@
             </ul>
         </nav>
     </div>
+
+
+
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCe6HOsdkxprLj2xPlpGBh_gAsZgkNPUJ8",
+            authDomain: "online-7ad75.firebaseapp.com",
+            databaseURL: "https://online-7ad75.firebaseio.com",
+            projectId: "online-7ad75",
+            storageBucket: "online-7ad75.appspot.com",
+            messagingSenderId: "340055360989",
+            appId: "1:340055360989:web:51cff8d7f042135c1e2234"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+
+        const db = firebase.firestore();
+        const userRef = db.collection('test');
+
+        userRef.doc('ItxCkyqWlrLjxk895aiS').set({
+            name: '鈴木太郎',
+            age: 22,
+            birthday: new Date('1996-11-11') // timestampe型にはDateオブジェクトを渡します。
+  createdAt: db.FieldValue.serverTimestamp() // サーバーの時間をセットすることもできます。
+        })
+            .then(() =>)
+            .catch(e => )
+    </script>
 </body>
 </html>
