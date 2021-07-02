@@ -100,11 +100,13 @@
             age: 22,
             birthday: new Date('1996-11-11'), // timestampe型にはDateオブジェクトを渡します。
             createdAt: db.FieldValue.serverTimestamp() // サーバーの時間をセットすることもできます。
-        }).then(() =>
-            console.log('成功');
-        ).catch (e =>
+        })
+            .then(() => {
+                console.log('成功');
+            })
+            .catch((e) => {
 
-        );
+            });
     </script>
 </body>
 </html>
