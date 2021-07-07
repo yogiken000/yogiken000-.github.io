@@ -1,8 +1,10 @@
 
 body {
+    overflow: hidden;
     color: #333;
-    font-family: "Hiragino Maru Gothic W4 JIS2004", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3",
+    font-family: "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3",
         "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 500;
 }
 
 @media screen and (min-width: 768px) {
@@ -15,4 +17,114 @@ body {
     .pr_sp-none {
         display: none !important;
     }
+}
+
+
+/*――――――――――――――――――――――――――――――――――――――――――――
+/* iconの利用
+――――――――――――――――――――――――――――――――――――――――――――――*/
+/* Material iconsを利用する */
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* 推奨サイズ */
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    text-transform: none;
+
+    /* WebKitブラウザサポート */
+    -webkit-font-smoothing: antialiased;
+    /* Chrome、Safariサポート */
+    text-rendering: optimizeLegibility;
+
+    /* Firefoxサポート */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* IEサポート */
+    font-feature-settings: 'liga';
+  }
+
+/* アイコンサイズ */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* 背景が明るいとき用のアイコン色 */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* 背景が暗いとき用のアイコン色 */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+
+.wrap {
+    display: flex;
+    position: relative;
+    width: 300vw;
+    transition: 0.2s;
+
+    &.js-active0 {
+        transform: translateX(0);
+    }
+    &.js-active1 {
+        transform: translateX(-100vw);
+    }
+    &.js-active2 {
+        transform: translateX(-200vw);
+    }
+}
+.display {
+    width: 100vw;
+    height: 100vh;
+}
+
+
+.nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+}
+.navList {
+    display: flex;
+}
+.navList__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33.333%;
+    background-color: #333;
+    color: #fff;
+    padding: 12px 0;
+    transition: 0.2s;
+    font-size: 15px;
+
+    & + .navList__item {
+        border-left: solid 1px #fff;
+    }
+
+    &.current {
+        background-color: #fff;
+        color: #333;
+    }
+}
+.navList__itemName {
+    margin-left: 5px;
+}
+
+
+#page1 {
+    background-color: #234;
+}
+#page2 {
+    background-color: #2f7344;
+}
+#page3 {
+    background-color: #543457;
 }

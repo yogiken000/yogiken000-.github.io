@@ -30,6 +30,7 @@
 
 
     <link rel="stylesheet" href="css/reset.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
     <link rel="manifest" href="/manifest.json">
@@ -46,30 +47,87 @@
 
 </head>
 <body>
-    <div>
-        <section id="page1">
-
-        </section>
-        <section id="page2">
-
-        </section>
-        <section id="page3">
-
-        </section>
-
-        <nav>
-            <ul>
-                <li>tab1</li>
-                <li>tab2</li>
-                <li>tab3</li>
+    <div class="wrap">
+        <section id="page1" class="display">
+            <ul class="inputList">
+                <li class="inputList__item">
+                    <select name="player1" id="">
+                        <option value="name1">name1</option>
+                        <option value="name2">name2</option>
+                        <option value="name3">name3</option>
+                        <option value="name4">name4</option>
+                    </select>
+                    <input type="number" id="player1_result" name="player1_result">
+                </li>
+                <li class="inputList__item">
+                    <select name="player2" id="">
+                        <option value="name1">name1</option>
+                        <option value="name2">name2</option>
+                        <option value="name3">name3</option>
+                        <option value="name4">name4</option>
+                    </select>
+                    <input type="number" id="player2_result" name="player2_result">
+                </li>
+                <li class="inputList__item">
+                    <select name="player3" id="">
+                        <option value="name1">name1</option>
+                        <option value="name2">name2</option>
+                        <option value="name3">name3</option>
+                        <option value="name4">name4</option>
+                    </select>
+                    <input type="number" id="player3_result" name="player3_result">
+                </li>
+                <li class="inputList__item">
+                    <select name="player4" id="">
+                        <option value="name1">name1</option>
+                        <option value="name2">name2</option>
+                        <option value="name3">name3</option>
+                        <option value="name4">name4</option>
+                    </select>
+                    <input type="number" id="player4_result" name="player4_result">
+                </li>
             </ul>
-        </nav>
+
+            <button type="button" class="inputSubmit">結果を確定</button>
+
+        </section>
+        <section id="page2" class="display">
+            ページ２
+
+        </section>
+        <section id="page3" class="display">
+            ページ３
+
+            <input type="text" id="cont">
+
+            <button type="button" id="add_btn">追加</button>
+            <div id="message"></div>
+        </section>
+
     </div>
+    <nav class="nav">
+        <ul class="navList">
+            <li class="navList__item current">
+                <span class="material-icons">
+                    edit
+                </span>
+                <span class="navList__itemName">入力</span>
+            </li>
+            <li class="navList__item page2">
+                <span class="material-icons">
+                    equalizer
+                </span>
+                <span class="navList__itemName">戦績</span>
+            </li>
+            <li class="navList__item page3">
+                <span class="material-icons">
+                    settings
+                </span>
+                <span class="navList__itemName">設定</span>
+            </li>
+        </ul>
+    </nav>
 
-    <input type="text" id="cont">
-
-    <button type="button" id="add_btn">追加</button>
-    <div id="message"></div>
 
 
 
@@ -80,6 +138,28 @@
 
 
     <script>
+        $(function () {
+            var isTouchDevice = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch);
+            var eventType = (isTouchDevice) ? 'touchend' : 'click';
+
+            tabChange(); //タブ切り替え
+
+            function tabChange(params) {
+                $('.navList__item').on(eventType, function () {
+                    $('.navList__item').removeClass('current');
+                    $(this).addClass('current');
+
+                    $('.wrap').removeClass('js-active0 js-active1 js-active2');
+                    var index = $(this).index();
+                    $('.wrap').addClass('js-active' + index);
+                });
+            }
+
+
+
+
+        });
+        //firebase
         // Your web app's Firebase configuration
         var firebaseConfig = {
             apiKey: "AIzaSyCe6HOsdkxprLj2xPlpGBh_gAsZgkNPUJ8",
@@ -109,15 +189,15 @@
         }
 
 
+
         $('#add_btn').on('click', function () {
             let val = $('#cont').val();
             addDB(val);
         });
 
 
-        userRef.onSnapshot((doc) => {
-            console.log("Current data: ", doc.data());
-        });
+
+
     </script>
 </body>
 </html>
