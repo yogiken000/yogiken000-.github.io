@@ -180,6 +180,9 @@ input[type="number"] {
 }
 
 .inputList__select {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   margin: 0 15px 0 0;
   background-color: #fff;
   color: #333;
@@ -197,7 +200,7 @@ input[type="number"] {
 }
 
 .inputList__input {
-  width: 100px;
+  width: 120px;
   background-color: transparent;
   border: none;
   border-bottom: solid 2px #fff;
@@ -216,6 +219,26 @@ input[type="number"] {
       -ms-flex-align: center;
           align-items: center;
   margin: 40px 0 20px 0;
+}
+
+/*** inputRealtimeResult ***/
+.inputRealtimeResult {
+  margin: 30px 0 30px 0;
+}
+
+.inputRealtimeResultTable {
+  width: 100%;
+  border: solid 1px #fff;
+}
+
+.inputRealtimeResultTable th, .inputRealtimeResultTable td {
+  border: solid 1px #fff;
+  padding: 5px 10px;
+}
+
+.inputRealtimeResultTable th {
+  background-color: #333;
+  color: #fff;
 }
 
 /*――――――――――――――――――――――――――――――――――――――――――――
