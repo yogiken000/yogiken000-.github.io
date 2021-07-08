@@ -23,7 +23,7 @@ $(function () {
             const player_index = $(this).closest('li').index();
 
             if ($(this).is('select')) {
-                const name = $(this).val();
+                const name = $(this).children('option:selected').text();
                 $('.inputRealtimeResultTable__name').eq(player_index).text(name);
             }
 
@@ -34,10 +34,19 @@ $(function () {
         });
     };
 
+    function inputResultSubmit() {
+        $('.inputSubmit').on(eventType, function () {
+            const result = $(".inputRealtimeResultTable").prop('outerHTML');
+            $('#page2 .resultDisplay').append(result);
+            alert('結果を反映しました！');
+        });
+    };
+
     tabChange(); //タブ切り替え
 
     $(window).on('load', function (params) {
         realtimeResult(); //DOMの監視
+        inputResultSubmit(); //結果を反映
     });
 
 
