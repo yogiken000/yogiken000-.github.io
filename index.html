@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>ボ―ドゲーム戦績表</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta property="og:site_name" content="">
@@ -30,6 +30,7 @@
 
 
     <link rel="stylesheet" href="css/reset.css">
+    <link href="https://unpkg.com/sanitize.css/forms.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
@@ -44,57 +45,87 @@
         }
     </script>
 
+    <script src="/js/main.js"></script>
+
 
 </head>
-<body>
+<body class="darkMode">
     <div class="wrap">
+
+        <!-- ページ1 -->
         <section id="page1" class="display">
             <ul class="inputList">
                 <li class="inputList__item">
-                    <select name="player1" id="">
+                    <select name="player1" id="player1" class="inputList__select">
+                        <option hidden>プレイヤー1</option>
                         <option value="name1">name1</option>
                         <option value="name2">name2</option>
                         <option value="name3">name3</option>
                         <option value="name4">name4</option>
                     </select>
-                    <input type="number" id="player1_result" name="player1_result">
+                    <p class="inputList__inputBox">
+                        <input type="number" name="player1_result" id="player1_result" class="inputList__input" maxlength="3">
+                        <span class="inputList__inputTxt">点</span>
+                    </p>
                 </li>
                 <li class="inputList__item">
-                    <select name="player2" id="">
+                    <select name="player2" id="player2" class="inputList__select">
+                        <option hidden>プレイヤー2</option>
                         <option value="name1">name1</option>
                         <option value="name2">name2</option>
                         <option value="name3">name3</option>
                         <option value="name4">name4</option>
                     </select>
-                    <input type="number" id="player2_result" name="player2_result">
+                    <p class="inputList__inputBox">
+                        <input type="number" name="player2_result" id="player2_result" class="inputList__input">
+                        <span class="inputList__inputTxt">点</span>
+                    </p>
                 </li>
                 <li class="inputList__item">
-                    <select name="player3" id="">
+                    <select name="player3" id="player3" class="inputList__select">
+                        <option hidden>プレイヤー3</option>
                         <option value="name1">name1</option>
                         <option value="name2">name2</option>
                         <option value="name3">name3</option>
                         <option value="name4">name4</option>
                     </select>
-                    <input type="number" id="player3_result" name="player3_result">
+                    <p class="inputList__inputBox">
+                        <input type="number" name="player3_result" id="player3_result" class="inputList__input">
+                        <span class="inputList__inputTxt">点</span>
+                    </p>
                 </li>
                 <li class="inputList__item">
-                    <select name="player4" id="">
+                    <select name="player4" id="player4" class="inputList__select">
+                        <option hidden>プレイヤー4</option>
                         <option value="name1">name1</option>
                         <option value="name2">name2</option>
                         <option value="name3">name3</option>
                         <option value="name4">name4</option>
                     </select>
-                    <input type="number" id="player4_result" name="player4_result">
+                    <p class="inputList__inputBox">
+                        <input type="number" name="player4_result" id="player4_result" class="inputList__input">
+                        <span class="inputList__inputTxt">点</span>
+                    </p>
                 </li>
             </ul>
-
-            <button type="button" class="inputSubmit">結果を確定</button>
-
+            <div class="btnBox">
+                <button type="button" class="btn inputSubmit">結果を確定</button>
+            </div>
         </section>
+        <!-- /ページ1 -->
+
+
+
+        <!-- ページ2 -->
         <section id="page2" class="display">
             ページ２
 
         </section>
+        <!-- /ページ2 -->
+
+
+
+        <!-- ページ3 -->
         <section id="page3" class="display">
             ページ３
 
@@ -103,8 +134,13 @@
             <button type="button" id="add_btn">追加</button>
             <div id="message"></div>
         </section>
+        <!-- /ページ3 -->
+
+
 
     </div>
+
+
     <nav class="nav">
         <ul class="navList">
             <li class="navList__item current">
@@ -113,13 +149,13 @@
                 </span>
                 <span class="navList__itemName">入力</span>
             </li>
-            <li class="navList__item page2">
+            <li class="navList__item">
                 <span class="material-icons">
                     equalizer
                 </span>
                 <span class="navList__itemName">戦績</span>
             </li>
-            <li class="navList__item page3">
+            <li class="navList__item">
                 <span class="material-icons">
                     settings
                 </span>
@@ -135,30 +171,7 @@
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js"></script>
-
-
     <script>
-        $(function () {
-            var isTouchDevice = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch);
-            var eventType = (isTouchDevice) ? 'touchend' : 'click';
-
-            tabChange(); //タブ切り替え
-
-            function tabChange(params) {
-                $('.navList__item').on(eventType, function () {
-                    $('.navList__item').removeClass('current');
-                    $(this).addClass('current');
-
-                    $('.wrap').removeClass('js-active0 js-active1 js-active2');
-                    var index = $(this).index();
-                    $('.wrap').addClass('js-active' + index);
-                });
-            }
-
-
-
-
-        });
         //firebase
         // Your web app's Firebase configuration
         var firebaseConfig = {
@@ -194,9 +207,6 @@
             let val = $('#cont').val();
             addDB(val);
         });
-
-
-
 
     </script>
 </body>

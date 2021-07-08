@@ -1,9 +1,23 @@
 @charset "UTF-8";
+:root {
+  --txt-base-color: #333;
+  --txt-base-color-darkMode: #fff;
+  --bg-base-color: #fff;
+  --bg-base-color-darkMode: #2d496f;
+  --box-shadow: #2d496f;
+}
+
 body {
   overflow: hidden;
-  color: #333;
+  color: var(--txt-base-color);
+  background-color: var(--bg-base-color);
   font-family: "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
+}
+
+body.darkMode {
+  color: var(--txt-base-color-darkMode);
+  background-color: var(--bg-base-color-darkMode);
 }
 
 @media screen and (min-width: 768px) {
@@ -16,6 +30,32 @@ body {
   .pr_sp-none {
     display: none !important;
   }
+}
+
+/**********************************************************
+
+form parts
+
+***********************************************************/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.btn {
+  display: inline-block;
+  padding: 1em 3em;
+  background-color: #e48500;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 /*――――――――――――――――――――――――――――――――――――――――――――
@@ -39,44 +79,6 @@ body {
   text-rendering: optimizeLegibility;
   /* Firefoxサポート */
   -moz-osx-font-smoothing: grayscale;
-  /* IEサポート */
-  -webkit-font-feature-settings: 'liga';
-          font-feature-settings: 'liga';
-}
-
-/* アイコンサイズ */
-.material-icons.md-18 {
-  font-size: 18px;
-}
-
-.material-icons.md-24 {
-  font-size: 24px;
-}
-
-.material-icons.md-36 {
-  font-size: 36px;
-}
-
-.material-icons.md-48 {
-  font-size: 48px;
-}
-
-/* 背景が明るいとき用のアイコン色 */
-.material-icons.md-dark {
-  color: rgba(0, 0, 0, 0.54);
-}
-
-.material-icons.md-dark.md-inactive {
-  color: rgba(0, 0, 0, 0.26);
-}
-
-/* 背景が暗いとき用のアイコン色 */
-.material-icons.md-light {
-  color: white;
-}
-
-.material-icons.md-light.md-inactive {
-  color: rgba(255, 255, 255, 0.3);
 }
 
 .wrap {
@@ -84,31 +86,20 @@ body {
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  width: 300vw;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 
-.wrap.js-active0 {
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-}
-
-.wrap.js-active1 {
-  -webkit-transform: translateX(-100vw);
-          transform: translateX(-100vw);
-}
-
-.wrap.js-active2 {
-  -webkit-transform: translateX(-200vw);
-          transform: translateX(-200vw);
-}
-
 .display {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   width: 100vw;
   height: 100vh;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 
+/*** ナビゲーション ***/
 .nav {
   position: fixed;
   bottom: 0;
@@ -124,16 +115,23 @@ body {
 }
 
 .navList__item {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 33.333%;
+  height: 64px;
   background-color: #333;
   color: #fff;
   padding: 12px 0;
@@ -152,17 +150,84 @@ body {
 }
 
 .navList__itemName {
-  margin-left: 5px;
+  margin-top: 2px;
 }
 
+/**********************************************************
+
+ページごとのスタイル
+
+***********************************************************/
+/*――――――――――――――――――――――――――――――――――――――――――――
+/* ページ1
+――――――――――――――――――――――――――――――――――――――――――――――*/
 #page1 {
-  background-color: #234;
+  padding: 15px;
+  background-color: #5c6f8a;
 }
 
+.inputList__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.inputList__item + .inputList__item {
+  margin-top: 20px;
+}
+
+.inputList__select {
+  margin: 0 15px 0 0;
+  background-color: #fff;
+  color: #333;
+  border: none;
+  font-size: 18px;
+}
+
+.inputList__inputBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.inputList__input {
+  width: 100px;
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 2px #fff;
+  font-size: 18px;
+  color: #fff;
+}
+
+.btnBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 40px 0 20px 0;
+}
+
+/*――――――――――――――――――――――――――――――――――――――――――――
+/* ページ2
+――――――――――――――――――――――――――――――――――――――――――――――*/
 #page2 {
   background-color: #2f7344;
 }
 
+/*――――――――――――――――――――――――――――――――――――――――――――
+/* ページ3
+――――――――――――――――――――――――――――――――――――――――――――――*/
 #page3 {
   background-color: #543457;
 }
