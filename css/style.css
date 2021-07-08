@@ -241,6 +241,11 @@ input[type="number"] {
   color: #fff;
 }
 
+.inputRealtimeResultTable td {
+  background-color: #fff;
+  color: #333;
+}
+
 /*――――――――――――――――――――――――――――――――――――――――――――
 /* ページ2
 ――――――――――――――――――――――――――――――――――――――――――――――*/
