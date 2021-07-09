@@ -7,13 +7,20 @@
   --box-shadow: #2d496f;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   overflow: hidden;
+  height: 100%;
   padding-bottom: 62px;
   color: var(--txt-base-color);
   background-color: var(--bg-base-color);
   font-family: "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
 }
 
 body.darkMode {
@@ -48,26 +55,41 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.btnBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .btn {
   display: inline-block;
-  padding: 1em 3em;
+  min-width: 60px;
+  padding: 6px 12px;
   background-color: #e48500;
   color: #fff;
   border: none;
   border-radius: 3px;
-  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
   font-size: 14px;
 }
 
 .btn-simple {
   display: inline-block;
-  padding: 5px 10px;
+  min-width: inherit;
+  padding: 5px 8px;
   background-color: transparent;
   text-decoration: underline;
   -webkit-box-shadow: none;
           box-shadow: none;
   text-align: center;
+  color: var(--txt-base-color);
 }
 
 .btn-circle {
@@ -80,10 +102,59 @@ input[type="number"] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
   background-color: #fff;
+}
+
+/**********************************************************
+
+card
+
+***********************************************************/
+.card {
+  padding: 12px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+/**********************************************************
+
+modal
+
+***********************************************************/
+.modal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.modal.js-active {
+  opacity: 1;
+  visibility: visible;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 /*――――――――――――――――――――――――――――――――――――――――――――
@@ -236,7 +307,7 @@ input[type="number"] {
   width: 120px;
   background-color: transparent;
   border: none;
-  border-bottom: solid 2px #fff;
+  border-bottom: solid 1px #fff;
   font-size: 18px;
   color: #fff;
   border-radius: 0;
@@ -302,19 +373,26 @@ input[type="number"] {
 ――――――――――――――――――――――――――――――――――――――――――――――*/
 #page3 {
   background-color: #5c6f8a;
-  padding: 15px;
+  padding: 0 15px;
 }
 
 .player__ttl {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   background-color: #333;
   color: #fff;
   text-align: center;
   font-weight: bold;
-  margin: -15px -15px 30px;
+  margin: 0 -15px 20px;
   padding: 3px;
 }
 
 /*** playerList ***/
+.playerList {
+  min-height: calc(100% - 120px);
+}
+
 .playerList__item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -333,9 +411,22 @@ input[type="number"] {
   border-top: solid 1px #999;
 }
 
+.playerList__name {
+  color: var(--txt-base-color-darkMode);
+  font-weight: bold;
+}
+
 .playerList__record {
   background-color: #539c75;
   padding: 5px 8px;
+}
+
+.playerList__rename {
+  color: var(--txt-base-color-darkMode);
+}
+
+.playerList__delete {
+  color: var(--txt-base-color-darkMode);
 }
 
 /*** playerAddBtn ***/
@@ -343,6 +434,10 @@ input[type="number"] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -351,10 +446,8 @@ input[type="number"] {
           align-items: center;
   position: -webkit-sticky;
   position: sticky;
-  bottom: 0;
+  bottom: 15px;
   z-index: 10;
-  width: 60px;
-  height: 60px;
   margin: 0 0 0 auto;
   border-radius: 50%;
   background-color: #fff;
@@ -362,6 +455,17 @@ input[type="number"] {
 
 .playerAddBtn__icon {
   font-size: 30px;
+}
+
+.playerAddBtn__txt {
+  color: #333;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.playerAddDisplay {
+  color: #333;
 }
 
 /*――――――――――――――――――――――――――――――――――――――――――――

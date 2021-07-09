@@ -42,11 +42,29 @@ $(function () {
         });
     };
 
+    function playerAdd() {
+        $('.playerAddBtn').on('click', function () {
+            $('.playerAddDisplay').addClass('js-active');
+        });
+        $('.playerAddDisplay__cancel').on('click', function () {
+            $('.playerAddDisplay').removeClass('js-active');
+        });
+
+        $(document).on('click', function (e) {
+            if (!$(e.target).closest('.playerAddDisplay__card').length && !$(e.target).closest('.playerAddBtn').length) {
+                $('.playerAddDisplay').removeClass('js-active');
+            } else {
+
+            }
+        });
+    }
+
     tabChange(); //タブ切り替え
 
     $(window).on('load', function (params) {
         realtimeResult(); //DOMの監視
         inputResultSubmit(); //結果を反映
+        playerAdd();
     });
 
 
