@@ -378,6 +378,10 @@ modal
   padding: 0 12px;
 }
 
+.inputRealtimeResultList__item + .inputRealtimeResultList__item {
+  margin-top: 15px;
+}
+
 /*――――――――――――――――――――――――――――――――――――――――――――
 /* ページ3
 ――――――――――――――――――――――――――――――――――――――――――――――*/
