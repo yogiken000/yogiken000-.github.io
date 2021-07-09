@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link href="https://unpkg.com/sanitize.css/forms.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/selmodal.css">
     <link rel="stylesheet" href="css/style.css">
 
     <link rel="manifest" href="/manifest.json">
@@ -45,6 +46,7 @@
         }
     </script>
 
+    <script src="/js/Jquery.selmodal.js"></script>
     <script src="/js/main.js"></script>
 
 
@@ -53,7 +55,8 @@
     <div class="wrap">
 
         <!-- ページ1 -->
-        <section id="page1" class="display input">
+        <section id="page1" class="display input selmodaltest">
+            <h2 class="displayHead">結果入力</h2>
             <ul class="inputList">
                 <li class="inputList__item">
                     <select name="player1" id="player1" class="inputList__select">
@@ -130,6 +133,7 @@
 
             <section class="inputRealtimeResult">
                 <h2 class="inputRealtimeResult__ttl">結果</h2>
+
                 <table class="inputRealtimeResultTable">
                     <tr>
                         <th class="inputRealtimeResultTable__name">name1</th>
@@ -156,9 +160,11 @@
 
         <!-- ページ2 -->
         <section id="page2" class="display result">
-            <h2 class="result__ttl">戦績</h2>
+            <h2 class="displayHead">戦績</h2>
             <section class="resultDisplay">
+                <ul class="inputRealtimeResultList">
 
+                </ul>
             </section>
 
         </section>
@@ -168,7 +174,7 @@
 
         <!-- ページ3 -->
         <section id="page3" class="display setting">
-            <h2 class="player__ttl">プレイヤー管理</h2>
+            <h2 class="displayHead">プレイヤー管理</h2>
 
             <ul class="playerList">
                 <li class="playerList__item">
@@ -222,7 +228,7 @@
 
         <!-- ページ4 -->
         <section id="page4" class="display setting">
-            <h2 class="setting__ttl">設定</h2>
+            <h2 class="displayHead">設定</h2>
 
         </section>
         <!-- /ページ4 -->

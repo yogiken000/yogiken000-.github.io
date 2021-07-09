@@ -5,6 +5,7 @@
   --bg-base-color: #fff;
   --bg-base-color-darkMode: #2d496f;
   --box-shadow: #2d496f;
+  --btm-nav-height: 56px;
 }
 
 html {
@@ -14,7 +15,7 @@ html {
 body {
   overflow: hidden;
   height: 100%;
-  padding-bottom: 62px;
+  padding-bottom: var(--btm-nav-height);
   color: var(--txt-base-color);
   background-color: var(--bg-base-color);
   font-family: "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -197,7 +198,7 @@ modal
   -ms-flex-negative: 0;
       flex-shrink: 0;
   width: 100vw;
-  height: calc(100vh - 62px);
+  height: calc(100vh - var(--btm-nav-height));
   -webkit-transition: 0.2s;
   transition: 0.2s;
   position: relative;
@@ -236,6 +237,7 @@ modal
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  height: var(--btm-nav-height);
   background-color: #333;
   color: #fff;
   padding: 8px 0;
@@ -263,10 +265,25 @@ modal
 
 ***********************************************************/
 /*――――――――――――――――――――――――――――――――――――――――――――
+/* 共通
+――――――――――――――――――――――――――――――――――――――――――――――*/
+.displayHead {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  margin: 0 -12px 20px;
+  padding: 3px;
+}
+
+/*――――――――――――――――――――――――――――――――――――――――――――
 /* ページ1
 ――――――――――――――――――――――――――――――――――――――――――――――*/
 #page1 {
-  padding: 15px;
+  padding: 0 12px;
   background-color: #5c6f8a;
 }
 
@@ -338,7 +355,8 @@ modal
 
 .inputRealtimeResultTable th, .inputRealtimeResultTable td {
   border: solid 1px #ccc;
-  padding: 5px 10px;
+  padding: 5px 6px;
+  font-size: 14px;
 }
 
 .inputRealtimeResultTable th {
@@ -349,6 +367,7 @@ modal
 .inputRealtimeResultTable td {
   background-color: #fff;
   color: #333;
+  text-align: center;
 }
 
 /*――――――――――――――――――――――――――――――――――――――――――――
@@ -356,16 +375,7 @@ modal
 ――――――――――――――――――――――――――――――――――――――――――――――*/
 #page2 {
   background-color: #2f7344;
-  padding: 15px;
-}
-
-.result__ttl {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  font-weight: bold;
-  margin: -15px -15px 30px;
-  padding: 3px;
+  padding: 0 12px;
 }
 
 /*――――――――――――――――――――――――――――――――――――――――――――
@@ -373,19 +383,7 @@ modal
 ――――――――――――――――――――――――――――――――――――――――――――――*/
 #page3 {
   background-color: #5c6f8a;
-  padding: 0 15px;
-}
-
-.player__ttl {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  font-weight: bold;
-  margin: 0 -15px 20px;
-  padding: 3px;
+  padding: 0 12px;
 }
 
 /*** playerList ***/
@@ -473,7 +471,7 @@ modal
 ――――――――――――――――――――――――――――――――――――――――――――――*/
 #page4 {
   background-color: #543457;
-  padding: 15px;
+  padding: 0 12px;
 }
 
 .setting__ttl {

@@ -36,8 +36,9 @@ $(function () {
 
     function inputResultSubmit() {
         $('.inputSubmit').on(eventType, function () {
-            const result = $(".inputRealtimeResultTable").prop('outerHTML');
-            $('#page2 .resultDisplay').append(result);
+            let result = $(".inputRealtimeResultTable").prop('outerHTML');
+            result = '<li class="inputRealtimeResultList__item">' + result + '</li>';
+            $('#page2 .inputRealtimeResultList').append(result);
             alert('結果を反映しました！');
         });
     };
@@ -62,6 +63,7 @@ $(function () {
     tabChange(); //タブ切り替え
 
     $(window).on('load', function (params) {
+        $('select').selModal();
         realtimeResult(); //DOMの監視
         inputResultSubmit(); //結果を反映
         playerAdd();
