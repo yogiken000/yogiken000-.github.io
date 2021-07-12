@@ -29,6 +29,10 @@ body.darkMode {
   background-color: var(--bg-base-color-darkMode);
 }
 
+.font-mincho {
+  font-family: 'Yu Mincho','游明朝', serif;
+}
+
 @media screen and (min-width: 768px) {
   .pr_pc-none {
     display: none !important;
@@ -291,6 +295,8 @@ modal
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -300,15 +306,22 @@ modal
   margin-top: 20px;
 }
 
+.inputList__position {
+  margin: 0 0 5px 0;
+  width: 100%;
+  font-weight: bold;
+}
+
 .inputList__select {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
   margin: 0 15px 0 0;
   background-color: #fff;
   color: #333;
   border: none;
   font-size: 18px;
+}
+
+.selModalButton {
+  width: 150px;
 }
 
 .inputList__inputBox {
@@ -350,6 +363,7 @@ modal
 
 .inputRealtimeResultTable {
   width: 100%;
+  table-layout: fixed;
   border: solid 1px #fff;
 }
 
@@ -368,6 +382,15 @@ modal
   background-color: #fff;
   color: #333;
   text-align: center;
+  font-weight: bold;
+}
+
+.inputRealtimeResultTable .plusPoint {
+  color: #0043ff;
+}
+
+.inputRealtimeResultTable .minusPoint {
+  color: #ff0000;
 }
 
 /*――――――――――――――――――――――――――――――――――――――――――――

@@ -28,8 +28,16 @@ $(function () {
             }
 
             if ($(this).is('input')) {
-                const point = $(this).val();
-                $('.inputRealtimeResultTable__point').eq(player_index).text(point);
+                let point = $(this).val();
+                let plusMinusStatus = '';
+                if (point > 0) {
+                    point = '+' + point;
+                    plusMinusStatus = 'plusPoint';
+                } else {
+                    plusMinusStatus = 'minusPoint';
+                }
+
+                $('.inputRealtimeResultTable__point').eq(player_index).text(point).addClass(plusMinusStatus);
             }
         });
     };
@@ -37,8 +45,11 @@ $(function () {
     function inputResultSubmit() {
         $('.inputSubmit').on(eventType, function () {
             let result = $(".inputRealtimeResultTable").prop('outerHTML');
-            result = '<li class="inputRealtimeResultList__item">' + result + '</li>';
+            const date = `<time>${getDate()}</time>`;
+            result = '<li class="inputRealtimeResultList__item">' + date + result + '</li>';
             $('#page2 .inputRealtimeResultList').append(result);
+            console.log(getDate());
+
             alert('結果を反映しました！');
         });
     };
@@ -58,6 +69,28 @@ $(function () {
 
             }
         });
+    }
+
+    const getDate = function () {
+        var today = new Date(); //インスタンスを生成
+        var week_array = ["日", "月", "火", "水", "木", "金", "土"]; //曜日の配列を用意
+
+        //dateObjという名前のオブジェクトを作成
+        var dateObj = {
+
+            year: today.getFullYear(), //年
+            month: today.getMonth() + 1, //月
+            day: today.getDate(), //日
+            week: week_array[today.getDay()], //曜日
+            hours: today.getHours(), //時
+            minutes: today.getMinutes(), //分
+            seconds: today.getSeconds(), //秒
+        }
+
+        //出力のフォーマットを定義
+        var display_format = dateObj.year + '/' + dateObj.month + '/' + dateObj.day + '(' + dateObj.week + ')';
+        return display_format;
+
     }
 
     tabChange(); //タブ切り替え
