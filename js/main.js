@@ -2,7 +2,9 @@ $(function () {
     var isTouchDevice = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch);
     var eventType = (isTouchDevice) ? 'touchend' : 'click';
 
-    function tabChange(params) {
+
+
+    const tabChange = function (params) {
         $('.navList__item').on(eventType, function () {
             $('.navList__item').removeClass('current');
             $(this).addClass('current');
@@ -18,7 +20,7 @@ $(function () {
         });
     }
 
-    function realtimeResult() {
+    const realtimeResult = function () {
         $('#page1 select, #page1 input').on('change', function () {
             const player_index = $(this).closest('li').index();
 
@@ -42,7 +44,7 @@ $(function () {
         });
     };
 
-    function inputResultSubmit() {
+    const inputResultSubmit = function () {
         $('.inputSubmit').on(eventType, function () {
             let result = $(".inputRealtimeResultTable").prop('outerHTML');
             const date = `<time>${getDate()}</time>`;
@@ -54,14 +56,13 @@ $(function () {
         });
     };
 
-    function playerAdd() {
+    const playerAdd = function () {
         $('.playerAddBtn').on('click', function () {
             $('.playerAddDisplay').addClass('js-active');
         });
         $('.playerAddDisplay__cancel').on('click', function () {
             $('.playerAddDisplay').removeClass('js-active');
         });
-
         $(document).on('click', function (e) {
             if (!$(e.target).closest('.playerAddDisplay__card').length && !$(e.target).closest('.playerAddBtn').length) {
                 $('.playerAddDisplay').removeClass('js-active');
@@ -69,6 +70,8 @@ $(function () {
 
             }
         });
+
+        playerResist();
     }
 
     const getDate = function () {
@@ -93,10 +96,55 @@ $(function () {
 
     }
 
-    tabChange(); //タブ切り替え
+    const playerResist = function () {
+        $('.playerAddDisplay__resist').on('click', function () {
+            const player_name = $('.playerAddDisplay__input').val();
+
+            // const nameList = データベースから名前のリストを取得する関数();
+            // if (nameList) {
+            //     alert('その名前は既に使われています。');
+            //     return false;
+            // }
+
+            const playerInfo = {};
+            playerInfo.player_name = new PlayerManager(player_name);
+            const htmlPlayerList = `
+            <li class="playerList__item">
+                    <p class="playerList__name">${playerInfo.player_name.name}</p>
+                    <div class="playerList__actitonBox">
+                        <a class="playerList__rename btn btn-simple">リネーム</a>
+                        <a class="playerList__delete btn btn-simple">削除</a>
+                        <a class="playerList__record btn">戦績を見る</a>
+                    </div>
+                </li>
+            `;
+            $('.playerList').append(htmlPlayerList);
+
+            $('.playerAddDisplay').removeClass('js-active');
+        });
+
+        const PlayerManager = class {
+            constructor(name) { /* コンストラクタ */
+                this.name = name; //プレイヤー名
+                this.gameCount = 0; //試合数
+                this.totalPoint = 0; //トータルポイント
+                this.rankingCount = {
+                    '1': 0,
+                    '2': 0,
+                    '3': 0,
+                    '4': 0
+                };
+                this.hakoCount = 0;
+            }
+
+        }
+
+    }
+
 
     $(window).on('load', function (params) {
-        $('select').selModal();
+        $('select').selModal(); //selectboxを使いやすくするプラグイン
+        tabChange(); //タブ切り替え
         realtimeResult(); //DOMの監視
         inputResultSubmit(); //結果を反映
         playerAdd();

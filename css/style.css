@@ -64,12 +64,13 @@ input[type="number"] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin: 20px 0 20px;
 }
 
 .btn {
@@ -85,6 +86,10 @@ input[type="number"] {
   font-size: 14px;
 }
 
+.btn + .btn {
+  margin-left: 5px;
+}
+
 .btn-simple {
   display: inline-block;
   min-width: inherit;
@@ -95,6 +100,10 @@ input[type="number"] {
           box-shadow: none;
   text-align: center;
   color: var(--txt-base-color);
+}
+
+.btn-simple + .btn-simple {
+  margin-left: 0;
 }
 
 .btn-circle {
@@ -121,7 +130,7 @@ card
 
 ***********************************************************/
 .card {
-  padding: 12px;
+  padding: 20px 20px;
   background-color: #fff;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
@@ -216,6 +225,8 @@ modal
   left: 0;
   z-index: 99;
   width: 100%;
+  -webkit-box-shadow: 0 -3px 7px -3px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 -3px 7px -3px rgba(0, 0, 0, 0.4);
 }
 
 .navList {
@@ -295,8 +306,6 @@ modal
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -307,13 +316,12 @@ modal
 }
 
 .inputList__position {
-  margin: 0 0 5px 0;
-  width: 100%;
+  margin: 0 10px 0 0;
   font-weight: bold;
 }
 
 .inputList__select {
-  margin: 0 15px 0 0;
+  display: block;
   background-color: #fff;
   color: #333;
   border: none;
@@ -321,7 +329,7 @@ modal
 }
 
 .selModalButton {
-  width: 150px;
+  margin: 0 15px 0 0;
 }
 
 .inputList__inputBox {
@@ -334,6 +342,7 @@ modal
 }
 
 .inputList__input {
+  display: block;
   width: 120px;
   background-color: transparent;
   border: none;
@@ -341,19 +350,6 @@ modal
   font-size: 18px;
   color: #fff;
   border-radius: 0;
-}
-
-.btnBox {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin: 40px 0 20px 0;
 }
 
 /*** inputRealtimeResult ***/
