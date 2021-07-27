@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ボ―ドゲーム戦績表</title>
+    <title>m</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta property="og:site_name" content="">
@@ -22,7 +22,7 @@
     <!-- アドレスバー等のブラウザのUIを非表示 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- default（Safariと同じ） / black（黒） / black-translucent（ステータスバーをコンテンツに含める） -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <!-- ホーム画面に表示されるアプリ名 -->
     <meta name="apple-mobile-web-app-title" content="ken">
     <!-- ホーム画面に表示されるアプリアイコン -->
@@ -33,11 +33,9 @@
     <link href="https://unpkg.com/sanitize.css/forms.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/selmodal.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
     <link rel="stylesheet" href="css/style.css">
-
     <link rel="manifest" href="/manifest.json">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
 
     <script>
         // service workerが有効なら、service-worker.js を登録します
@@ -46,30 +44,36 @@
         }
     </script>
 
-    <script src="/js/Jquery.selmodal.js"></script>
-    <script src="/js/main.js"></script>
+
 
 
 </head>
 <body class="darkMode">
+
+    <div class="loading">
+        <div class="sk-folding-cube">
+            <div class="sk-cube1 sk-cube"></div>
+            <div class="sk-cube2 sk-cube"></div>
+            <div class="sk-cube4 sk-cube"></div>
+            <div class="sk-cube3 sk-cube"></div>
+        </div>
+    </div>
+
+
     <div class="wrap">
 
         <!-- ページ1 -->
         <section id="page1" class="display input selmodaltest">
             <h2 class="displayHead">結果入力</h2>
+
+            <div id="firebaseui-auth-container"></div>
+
             <ul class="inputList">
                 <li class="inputList__item">
-                    <p class="inputList__position font-mincho">東家</p>
+                    <!-- <p class="inputList__position font-mincho">東家</p> -->
                     <select name="player1" id="player1" class="inputList__select">
                         <option hidden>プレイヤー1</option>
-                        <option value="name1">kenken</option>
-                        <option value="name2">のんか～</option>
-                        <option value="name3">エクレア</option>
-                        <option value="name4">あやたか</option>
-                        <option value="name5">まいん</option>
-                        <option value="name6">にゃんきち</option>
-                        <option value="name7">でんでん</option>
-                        <option value="name8">あはごん</option>
+
                     </select>
                     <p class="inputList__inputBox">
                         <input type="number" name="player1_result" id="player1_result" class="inputList__input">
@@ -77,17 +81,10 @@
                     </p>
                 </li>
                 <li class="inputList__item">
-                    <p class="inputList__position font-mincho">南家</p>
+                    <!-- <p class="inputList__position font-mincho">南家</p> -->
                     <select name="player2" id="player2" class="inputList__select">
                         <option hidden>プレイヤー2</option>
-                        <option value="name1">kenken</option>
-                        <option value="name2">のんか～</option>
-                        <option value="name3">エクレア</option>
-                        <option value="name4">あやたか</option>
-                        <option value="name5">まいん</option>
-                        <option value="name6">にゃんきち</option>
-                        <option value="name7">でんでん</option>
-                        <option value="name8">あはごん</option>
+
                     </select>
                     <p class="inputList__inputBox">
                         <input type="number" name="player2_result" id="player2_result" class="inputList__input">
@@ -95,17 +92,10 @@
                     </p>
                 </li>
                 <li class="inputList__item">
-                    <p class="inputList__position font-mincho">西家</p>
+                    <!-- <p class="inputList__position font-mincho">西家</p> -->
                     <select name="player3" id="player3" class="inputList__select">
                         <option hidden>プレイヤー3</option>
-                        <option value="name1">kenken</option>
-                        <option value="name2">のんか～</option>
-                        <option value="name3">エクレア</option>
-                        <option value="name4">あやたか</option>
-                        <option value="name5">まいん</option>
-                        <option value="name6">にゃんきち</option>
-                        <option value="name7">でんでん</option>
-                        <option value="name8">あはごん</option>
+
                     </select>
                     <p class="inputList__inputBox">
                         <input type="number" name="player3_result" id="player3_result" class="inputList__input">
@@ -113,17 +103,10 @@
                     </p>
                 </li>
                 <li class="inputList__item">
-                    <p class="inputList__position font-mincho">北家</p>
+                    <!-- <p class="inputList__position font-mincho">北家</p> -->
                     <select name="player4" id="player4" class="inputList__select">
                         <option hidden>プレイヤー4</option>
-                        <option value="name1">kenken</option>
-                        <option value="name2">のんか～</option>
-                        <option value="name3">エクレア</option>
-                        <option value="name4">あやたか</option>
-                        <option value="name5">まいん</option>
-                        <option value="name6">にゃんきち</option>
-                        <option value="name7">でんでん</option>
-                        <option value="name8">あはごん</option>
+
                     </select>
                     <p class="inputList__inputBox">
                         <input type="number" name="player4_result" id="player4_result" class="inputList__input">
@@ -163,7 +146,7 @@
         <section id="page2" class="display result">
             <h2 class="displayHead">戦績</h2>
             <section class="resultDisplay">
-                <ul class="inputRealtimeResultList">
+                <ul class="resultList">
 
                 </ul>
             </section>
@@ -219,8 +202,16 @@
                         <a class="btn playerAddDisplay__resist">登録</a>
                     </div>
                 </div>
+            </section>
 
-
+            <section class="playerDeleteDisplay modal">
+                <div class="card playerDeleteDisplay__card">
+                    <p class="playerDeleteDisplay__ttl">※戦績のデータも削除されます。よろしいですか？</p>
+                    <div class="btnBox">
+                        <a class="btn btn-simple playerDeleteDisplay__cancel">キャンセル</a>
+                        <a class="btn playerDeleteDisplay__delete">削除</a>
+                    </div>
+                </div>
             </section>
 
         </section>
@@ -230,6 +221,54 @@
         <!-- ページ4 -->
         <section id="page4" class="display setting">
             <h2 class="displayHead">設定</h2>
+
+            <dl class="settingList">
+                <div class="settingList__item">
+                    <dt class="settingList__ttl">
+                        人数
+                    </dt>
+                    <dd class="settingList__rule">
+                        <label class="settingList__label">
+                            <input type="radio" name="setting_format" value="4" checked class="settingList__radioBtn">
+                            <span class="settingList__txt">四麻</span>
+                        </label>
+                        <label class="settingList__label">
+                            <input type="radio" name="setting_format" value="3" class="settingList__radioBtn">
+                            <span class="settingList__txt">三麻</span>
+                        </label>
+                    </dd>
+                </div>
+                <div class="settingList__item">
+                    <dt class="settingList__ttl">
+                        ウマ
+                    </dt>
+                    <dd class="settingList__rule">
+                        <label class="settingList__label">
+                            <input type="radio" name="setting_uma" value="10-20" checked class="settingList__radioBtn">
+                            <span class="settingList__txt">10-20</span>
+                        </label>
+                        <label class="settingList__label">
+                            <input type="radio" name="setting_uma" value="5-10" class="settingList__radioBtn">
+                            <span class="settingList__txt">5-10</span>
+                        </label>
+                    </dd>
+                </div>
+                <div class="settingList__item">
+                    <dt class="settingList__ttl">
+                        オカ(30,000点返し)
+                    </dt>
+                    <dd class="settingList__rule">
+                        <label class="settingList__label">
+                            <input type="radio" name="setting_oka" value="1" checked class="settingList__radioBtn">
+                            <span class="settingList__txt">あり</span>
+                        </label>
+                        <label class="settingList__label">
+                            <input type="radio" name="setting_oka" value="0" class="settingList__radioBtn">
+                            <span class="settingList__txt">なし</span>
+                        </label>
+                    </dd>
+                </div>
+            </dl>
 
 
             <a class="btn setting__reload" onclick="document.location.reload(true)">リロード</a>
@@ -271,15 +310,11 @@
         </ul>
     </nav>
 
-
-
-
-
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/3.5.2/firebase-ui-auth__ja.js"></script>
     <script>
-        //firebase
         // Your web app's Firebase configuration
         var firebaseConfig = {
             apiKey: "AIzaSyCe6HOsdkxprLj2xPlpGBh_gAsZgkNPUJ8",
@@ -290,31 +325,34 @@
             messagingSenderId: "340055360989",
             appId: "1:340055360989:web:51cff8d7f042135c1e2234"
         };
+        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-
-
-        const db = firebase.firestore();
-        const userRef = db.collection('test');
-
-        function addDB(val) {
-            userRef.doc().set({
-                name: val
-            })
-                .then(() => {
-                    alert('成功');
-                })
-                .catch((e) => {
-                    alert('失敗');
-                });
-        }
-
-
-
-        $('#add_btn').on('click', function () {
-            let val = $('#cont').val();
-            addDB(val);
-        });
-
     </script>
+    <script>
+        //----------------------------------------------
+        // Firebase UIの設定
+        //----------------------------------------------
+        var uiConfig = {
+            // ログイン完了時のリダイレクト先
+            // signInSuccessUrl: 'https://web-loid.net/',
+
+            // 利用する認証機能
+            signInOptions: [
+                firebase.auth.TwitterAuthProvider.PROVIDER_ID
+            ],
+
+            // 利用規約のURL(任意で設定)
+            tosUrl: 'http://example.com/kiyaku/',
+            // プライバシーポリシーのURL(任意で設定)
+            privacyPolicyUrl: 'http://example.com/privacy'
+        };
+
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="/js/Jquery.selmodal.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>

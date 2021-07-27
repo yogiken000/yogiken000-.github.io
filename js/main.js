@@ -1,11 +1,53 @@
 $(function () {
-    var isTouchDevice = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch);
-    var eventType = (isTouchDevice) ? 'touchend' : 'click';
+
+    const playerLoad = function () {
+        var def = $.Deferred();
+
+        const player_load = {
+            "player_load": 1
+        }
+        ajaxDataSave(player_load).done(function (result, textStatus, jqXHR) {
+            const players = $.parseJSON(result);
+            let page3_players_list = '';
+            let page1_players_select = '';
+            $(players).each(function (index, player) {
+                page3_players_list += `
+                    <li class="playerList__item">
+                        <p class="playerList__name">${player.name}</p>
+                        <div class="playerList__actitonBox">
+                            <a class="playerList__rename btn btn-simple">リネーム</a>
+                            <a class="playerList__delete btn btn-simple">削除</a>
+                            <a class="playerList__record btn">戦績を見る</a>
+                        </div>
+                    </li>
+                `;
+
+                page1_players_select += `
+                    <option value="${player.name}">${player.name}</option>
+                `;
+            });
+            $('.playerList').html(page3_players_list);
 
 
+            $('.inputList__select').each(function (index, val) {
+                $(this).append(page1_players_select);
+            });
+
+            $('select').selModal(); // セレクトボックスを使いやすくするプラグインの起動
+            $('.loading').fadeOut(); //ローディングを解除
+
+
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert('データベースへの接続に失敗しました。');
+        }).always(function () {
+            def.resolve();
+        });
+
+        return def.promise();
+    };
 
     const tabChange = function (params) {
-        $('.navList__item').on(eventType, function () {
+        $('.navList__item').on('click', function () {
             $('.navList__item').removeClass('current');
             $(this).addClass('current');
 
@@ -30,6 +72,26 @@ $(function () {
             }
 
             if ($(this).is('input')) {
+
+                let input_flag = false;
+                $('#page1 input').each(function () {
+                    if (!$(this).val()) {
+                        input_flag = false;
+                        return false;
+                    }
+
+                    if ($(this).val()) {
+                        input_flag = true;
+                    }
+
+                });
+
+                //持ち点の入力が終わったら得点計算
+                if (input_flag) {
+                    pointCalc();
+                }
+
+
                 let point = $(this).val();
                 let plusMinusStatus = '';
                 if (point > 0) {
@@ -41,18 +103,42 @@ $(function () {
 
                 $('.inputRealtimeResultTable__point').eq(player_index).text(point).addClass(plusMinusStatus);
             }
+
+
         });
+    };
+    const pointCalc = function () {
+        const point_array = [];
+        $('#page1 .inputList__input').each(function () {
+            point_array.push(Math.round($(this).val() / 10) * 10); //1桁目を四捨五入
+        });
+        function compareFunc(a, b) {
+            return b - a;
+        }
+        point_array.sort(compareFunc);
     };
 
     const inputResultSubmit = function () {
-        $('.inputSubmit').on(eventType, function () {
+        $('.inputSubmit').on('click', function () {
             let result = $(".inputRealtimeResultTable").prop('outerHTML');
-            const date = `<time>${getDate()}</time>`;
-            result = '<li class="inputRealtimeResultList__item">' + date + result + '</li>';
-            $('#page2 .inputRealtimeResultList').append(result);
+            result = `
+            <li class="resultList__item">
+            <div class="resultList__info">
+            <time class="resultList__date">${getDate()}</time>
+            <a class="btn btn-simple resultList__delete">削除</a>
+            </div>
+            ${result}
+            </li>
+            `;
+            $('#page2 .resultList').append(result);
             console.log(getDate());
 
             alert('結果を反映しました！');
+
+            const result_obj = {
+                "date": getDate(),
+
+            }
         });
     };
 
@@ -97,7 +183,7 @@ $(function () {
     }
 
     const playerResist = function () {
-        $('.playerAddDisplay__resist').on('click', function () {
+        $(document).on('click', '.playerAddDisplay__resist', function () {
             const player_name = $('.playerAddDisplay__input').val();
 
             // const nameList = データベースから名前のリストを取得する関数();
@@ -106,11 +192,13 @@ $(function () {
             //     return false;
             // }
 
-            const playerInfo = {};
-            playerInfo.player_name = new PlayerManager(player_name);
+            const player = {
+
+            };
+            player["player_resist"] = new PlayerManager(player_name);
             const htmlPlayerList = `
             <li class="playerList__item">
-                    <p class="playerList__name">${playerInfo.player_name.name}</p>
+                    <p class="playerList__name">${player_name}</p>
                     <div class="playerList__actitonBox">
                         <a class="playerList__rename btn btn-simple">リネーム</a>
                         <a class="playerList__delete btn btn-simple">削除</a>
@@ -119,8 +207,17 @@ $(function () {
                 </li>
             `;
             $('.playerList').append(htmlPlayerList);
-
             $('.playerAddDisplay').removeClass('js-active');
+
+            ajaxPlayerSave(player); //jsonファイルにプレイヤー情報を格納
+
+            $('.inputList__select').each(function (index, val) {
+                $(this).append(`<option value="${player_name}">${player_name}</option>`);
+            });
+            $('select').selModal();
+            alert(player_name + 'が追加されました。');
+
+
         });
 
         const PlayerManager = class {
@@ -139,16 +236,112 @@ $(function () {
 
         }
 
+        const ajaxPlayerSave = function (player) {
+            var def = $.Deferred();
+
+            ajaxDataSave(player).done(function (result, textStatus, jqXHR) {
+
+
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert('データベースへの接続に失敗しました。');
+            }).always(function () {
+                def.resolve();
+            });
+
+            return def.promise();
+        };
+
+
     }
 
+    const playerDelete = function () {
+        let delete_player_name = '';
+        let delete_player_listItem = '';
+        $(document).on('click', '.playerList__delete', function () {
+            $('.playerDeleteDisplay').addClass('js-active');
+            delete_player_listItem = $(this).closest('.playerList__item');
+            delete_player_name = delete_player_listItem.find('.playerList__name').text();
+        });
+        $(document).on('click', '.playerDeleteDisplay__cancel', function () {
+            $('.playerDeleteDisplay').removeClass('js-active');
+        });
+        $(document).on('click', function (e) {
+            if (!$(e.target).closest('.playerDeleteDisplay__card').length && !$(e.target).closest('.playerList__delete').length) {
+                $('.playerDeleteDisplay').removeClass('js-active');
+            } else {
 
-    $(window).on('load', function (params) {
-        $('select').selModal(); //selectboxを使いやすくするプラグイン
+            }
+        });
+
+
+        $(document).on('click', '.playerDeleteDisplay__delete', function () {
+            var def = $.Deferred();
+            const player_delete = {
+                "player_delete": delete_player_name
+            }
+            ajaxDataSave(player_delete).done(function (result, textStatus, jqXHR) {
+
+                $(delete_player_listItem).remove();
+                alert(delete_player_name + 'を削除しました。');
+                $('.playerDeleteDisplay').removeClass('js-active');
+
+                //page1 セレクトボックス名前削除
+                $('.inputList__select').each(function (index, val) {
+                    $(this).find('option').each(function (index, val) {
+                        if ($(this).text() === delete_player_name) {
+                            $(this).remove();
+                        }
+                    });
+                });
+                $('select').selModal();
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert('データベースへの接続に失敗しました。');
+            }).always(function () {
+                def.resolve();
+            });
+
+            return def.promise();
+        });
+    };
+
+
+    $(window).on('load', function () {
+        playerLoad();
         tabChange(); //タブ切り替え
         realtimeResult(); //DOMの監視
         inputResultSubmit(); //結果を反映
         playerAdd();
+        playerDelete();
     });
+
+
+
+    /***************************************************
+
+    ajax通信
+
+    ***************************************************/
+    var jqxhr = null; //ajax連続通信防止
+    function ajaxDataSave(data) {
+
+        if (jqxhr) {
+            // 通信を中断する
+            // ただしfail(), always()は実行される
+            jqxhr.abort();
+        }
+
+        data = JSON.stringify(data); //オブジェクトを文字列に変換
+
+        jqxhr = $.ajax({
+            url: '/database_access.php',
+            type: 'POST',
+            data: {
+                "post_data": data
+            }
+        });
+
+        return jqxhr;
+    }
 
 
 });

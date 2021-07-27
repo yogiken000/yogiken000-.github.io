@@ -1,8 +1,56 @@
-[
-    {
-        "a": "b"
+{
+    "setting": {
+        "number": 4,
+        "uma": "10-20",
+        "oka": true
     },
-    {
-        "b": 3
-    }
-]
+    "player_list": [
+        {
+            "name": "追加",
+            "gameCount": 0,
+            "totalPoint": 0,
+            "rankingCount": {
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "hakoCount": 0
+        },
+        {
+            "name": "追加３",
+            "gameCount": 0,
+            "totalPoint": 0,
+            "rankingCount": {
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "hakoCount": 0
+        }
+    ],
+    "result_obj": [
+        {
+            "date": "2020-05-06",
+            "result": [
+                {
+                    "name": "追加",
+                    "point": 24
+                },
+                {
+                    "name": "追加",
+                    "point": 24
+                },
+                {
+                    "name": "追加",
+                    "point": 24
+                },
+                {
+                    "name": "追加",
+                    "point": 24
+                }
+            ]
+        }
+    ]
+}
